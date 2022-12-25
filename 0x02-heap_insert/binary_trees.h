@@ -31,4 +31,7 @@ void binary_tree_print(const binary_tree_t *);
 binary_tree_t *binary_tree_node(binary_tree_t *parent, int value);
 heap_t *heap_insert(heap_t **root, int value);
 
+/* Function additional*/
+void check_heap_property(heap_t *current);
+
 #endif /* _BINARY_TREES_H_ */
