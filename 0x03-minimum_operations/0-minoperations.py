@@ -15,15 +15,16 @@ def minOperations(n):
     divisible = False
     result = n
 
-    for i in range(2, n+1):
-        if result % i == 0:
-            divisible = True
-            result = result / i
-            count += i
-        else:
-            if divisible:
-                divisible = False
-                result = n
+    while result > 1:
+        for i in range(2, n+1):
+            if result % i == 0:
+                divisible = True
+                result = result / i
+                count += i
+                break
             else:
-                continue
+                divisible = False
+        if not divisible:
+            count += result
+            break
     return count
