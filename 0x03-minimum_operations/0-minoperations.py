@@ -1,4 +1,9 @@
 #!/usr/bin/python3
+"""
+file creation minOperations
+"""
+
+
 def minOperations(n):
     """
     fonction minOperation
