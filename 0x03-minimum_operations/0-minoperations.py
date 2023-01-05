@@ -1,12 +1,12 @@
 #!/usr/bin/python3
 """
-file creation minOperations
+Fichier de création min opération
 """
 
 
 def minOperations(n):
     """
-    method minOperations
+    fonction en opération minimal
     """
     if n == 1 or n == 0:
         return 0
