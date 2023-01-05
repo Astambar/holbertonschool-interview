@@ -1,5 +1,8 @@
 #!/usr/bin/python3
 def minOperations(n):
+    """
+    fonction minOperation
+    """
     operations = 0
     # Set the current number of characters in the file to 1
     current_characters = 1
