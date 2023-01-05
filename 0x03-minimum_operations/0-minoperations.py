@@ -5,14 +5,18 @@ file creation minOperations
 
 
 def minOperations(n):
-    """
-    fonction minOperation
-    """
-    operations = 0
-    current_characters = 1
-    while current_characters < n:
-        current_characters *= 2
-        operations += 1
-    if current_characters > n:
-        operations += 1
-    return operations
+    """minOperation"""
+    if n == 1 or n == 0:
+        return 0
+
+    total = 0
+    for i in range(2, n+1):
+        found_factor = False
+        while n % i == 0:
+            found_factor = True
+            n = n / i
+            total += i
+        if not found_factor:
+            break
+    return total
+
