@@ -11,13 +11,19 @@ def minOperations(n):
     if n == 1 or n == 0:
         return 0
 
-    init = 2
     count = 0
+    divisible = False
+    result = n
 
-    while n > 1:
-        if n % init == 0:
-            n = n / init
-            count += init
+    for i in range(2, n+1):
+        if result % i == 0:
+            divisible = True
+            result = result / i
+            count += i
         else:
-            init += 1
+            if divisible:
+                divisible = False
+                result = n
+            else:
+                continue
     return count
