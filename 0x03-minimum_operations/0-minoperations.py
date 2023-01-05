@@ -21,4 +21,3 @@ def minOperations(n):
         else:
             init += 1
     return count
-
