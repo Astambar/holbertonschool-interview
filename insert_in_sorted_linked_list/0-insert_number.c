@@ -4,14 +4,14 @@
 
 
 /**
- * find_insertion_point - Trouve le point d'insertion
+ * get_previous_node_for_insertion - Trouve le point d'insertion
  * pour un nouveau noeud dans une liste chaînée triée
  * @head: Pointeur vers la tête de la liste chaînée
  * @number: La valeur à insérer dans le nouveau noeud
  * Return: un double pointeur vers le nœud précédent
  * où le nouveau nœud doit être inséré
  */
-listint_t **find_insertion_point(listint_t **head, int number)
+listint_t **get_previous_node_for_insertion(listint_t **head, int number)
 {
 	listint_t **current_node = head;
 
@@ -47,20 +47,20 @@ listint_t *insert_node(listint_t **head, int number)
 		return (new_node);
 	}
 
-	insertion_point = find_insertion_point(head, number);
-	insert_node_at_point(insertion_point, new_node);
+	insertion_point = get_previous_node_for_insertion(head, number);
+	insert_node_before(insertion_point, new_node);
 
 	return (new_node);
 }
 
 /**
- * insert_node_at_point - Insère un nouveau noeud
+ * insert_node_before - Insère un nouveau noeud
  * dans une liste chaînée à l'emplacement spécifié
  * @insertion_point: Double pointeur vers le nœud précédent
  * où le nouveau nœud doit être inséré
  * @new_node: Pointeur vers le nouveau noeud à insérer
  */
-void insert_node_at_point(listint_t **insertion_point, listint_t *new_node)
+void insert_node_before(listint_t **insertion_point, listint_t *new_node)
 {
 	new_node->next = *insertion_point;
 	*insertion_point = new_node;

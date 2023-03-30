@@ -22,6 +22,6 @@ listint_t *add_nodeint_end(listint_t **head, const int n);
 void free_listint(listint_t *head);
 
 listint_t *insert_node(listint_t **head, int number);
-void insert_node_at_point(listint_t **insertion_point, listint_t *new_node);
-listint_t **find_insertion_point(listint_t **head, int number);
+void insert_node_before(listint_t **insertion_point, listint_t *new_node);
+listint_t **get_previous_node_for_insertion(listint_t **head, int number);
 #endif /* LISTS_H */
