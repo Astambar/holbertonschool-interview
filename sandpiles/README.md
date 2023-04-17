@@ -8,6 +8,15 @@ Le problème des tas de sable consiste à ajouter deux grilles de nombres entier
 
 Ce projet fournit une implémentation en C pour résoudre ce problème.
 
+## Installation
+
+Pour installer ce projet, clonez le dépôt et accédez au répertoire du projet :
+
+```bash
+$ git clone https://github.com/Astambar/holbertonschool-interview.git
+$ cd holbertonschool-interview/sandpiles/
+```
+
 ## Utilisation
 
 Pour utiliser ce code, compilez-le avec `gcc` et exécutez-le avec deux grilles de nombres entiers de taille 3x3 comme arguments.
