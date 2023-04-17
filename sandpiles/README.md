@@ -24,6 +24,7 @@ Pour utiliser ce code, compilez-le avec `gcc` et exécutez-le avec deux grilles 
 ```bash
 $ gcc -Wall -Wextra -Werror -pedantic 0-main.c 0-sandpiles.c -o 0-sandpiles
 $ ./0-sandpiles
+```
 3 3 3   1 3 1
 3 3 3 + 3 3 3
 3 3 3   1 3 1
@@ -51,8 +52,10 @@ $ ./0-sandpiles
 2 2 2
 2 2 2
 2 2 2
+```bash
 $ gcc -Wall -Wextra -Werror -pedantic 1-main.c 0-sandpiles.c -o 0-sandpiles
 $ ./0-sandpiles 
+```
 0 0 0   3 3 3
 0 0 0 + 3 3 3
 0 0 0   3 3 3
@@ -60,7 +63,7 @@ $ ./0-sandpiles
 3 3 3
 3 3 3
 3 3 3
-```
+
 ## Fonctionnalités
 
 Ce projet fournit les fonctions suivantes pour résoudre le problème des tas de sable :
