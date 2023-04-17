@@ -65,6 +65,7 @@ void add_grids(int firstGrid[3][3], int secondGrid[3][3])
 void stabilize_grid(int grid[3][3])
 {
 	int row, column;
+	int temp_grid[3][3] = {{0, 0, 0}, {0, 0, 0}, {0, 0, 0}};
 
 	for (row = 0; row < 3; row++)
 	{
@@ -74,16 +75,17 @@ void stabilize_grid(int grid[3][3])
 			{
 				grid[row][column] -= 4;
 				if (row > 0)
-					grid[row - 1][column]++;
+					temp_grid[row - 1][column]++;
 				if (column > 0)
-					grid[row][column - 1]++;
+					temp_grid[row][column - 1]++;
 				if (row < 2)
-					grid[row + 1][column]++;
+					temp_grid[row + 1][column]++;
 				if (column < 2)
-					grid[row][column + 1]++;
+					temp_grid[row][column + 1]++;
 			}
 		}
 	}
+	add_grids(grid, temp_grid);
 }
 
 /**
