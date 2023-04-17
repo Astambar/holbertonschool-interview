@@ -84,12 +84,10 @@ retour de la commande pour cet exemple :
 ```
 ## Fonctionnalités
 
-Ce projet fournit les fonctions suivantes pour résoudre le problème des tas de sable :
+Ce projet fournit les fonctions suivantes pour résoudre le problème des tas de sable, disponibles dans le fichier [0-sandpiles.c](./0-sandpiles.c) :
 
 - `void print_grids(int grid[3][3])` : affiche une grille de nombres entiers de taille 3x3.
 - `int is_unstable(int grid[3][3])` : vérifie si une grille est instable (c'est-à-dire si elle contient des valeurs supérieures à 3).
 - `void add_grids(int firstGrid[3][3], int secondGrid[3][3])` : ajoute deux grilles de nombres entiers de taille 3x3.
 - `void stabilize_grid(int grid[3][3])` : stabilise une grille en répartissant les valeurs supérieures à 3 dans les cellules adjacentes.
 - `void sandpiles_sum(int firstGrid[3][3], int secondGrid[3][3])` : ajoute deux grilles de nombres entiers de taille 3x3 et stabilise le résultat.
-
-### Les  Fonctions actuels sont disponibles depuis le fichier [0-sandpiles.c](./0-sandpiles.c)
