@@ -1,5 +1,3 @@
-# sandpiles
-
 # Sandpiles
 
 Ce projet implémente une solution au problème des tas de sable en C.
