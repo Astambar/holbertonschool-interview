@@ -12,8 +12,12 @@ Ce projet fournit une implémentation en C pour résoudre ce problème.
 
 Pour installer ce projet, clonez le dépôt et accédez au répertoire du projet :
 
+Tout d'abord clone le repository à l'emplacement souhaiter:
 ```bash
 $ git clone https://github.com/Astambar/holbertonschool-interview.git
+```
+puis accède au projet :
+```bash
 $ cd holbertonschool-interview/sandpiles/
 ```
 
