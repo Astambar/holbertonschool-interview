@@ -23,8 +23,12 @@ Pour utiliser ce code, compilez-le avec `gcc` et exécutez-le avec deux grilles 
 
 ```bash
 $ gcc -Wall -Wextra -Werror -pedantic 0-main.c 0-sandpiles.c -o 0-sandpiles
+```
+puis exécuter le code compilé ainsi:
+```bash
 $ ./0-sandpiles
 ```
+Voici un exemple avec le [0-main.c](./0-main.c) actuel:
 ```txt
 3 3 3   1 3 1
 3 3 3 + 3 3 3
