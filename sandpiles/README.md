@@ -91,3 +91,5 @@ Ce projet fournit les fonctions suivantes pour résoudre le problème des tas de
 - `void add_grids(int firstGrid[3][3], int secondGrid[3][3])` : ajoute deux grilles de nombres entiers de taille 3x3.
 - `void stabilize_grid(int grid[3][3])` : stabilise une grille en répartissant les valeurs supérieures à 3 dans les cellules adjacentes.
 - `void sandpiles_sum(int firstGrid[3][3], int secondGrid[3][3])` : ajoute deux grilles de nombres entiers de taille 3x3 et stabilise le résultat.
+
+Ce projet fournit les fonctions suivantes pour résoudre le problème des tas de sable, disponibles dans le fichier [imagine_newfile.c](./imagine_newfile.c) :
