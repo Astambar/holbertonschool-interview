@@ -6,18 +6,18 @@
  */
 void print_grids(int grid[3][3])
 {
-    int row, col;
+	int row, col;
 
-    for (row = 0; row < 3; row++)
-    {
-        for (col = 0; col < 3; col++)
-        {
-            if (col)
-                printf(" ");
-            printf("%d", grid[row][col]);
-        }
-        printf("\n");
-    }
+	for (row = 0; row < 3; row++)
+	{
+		for (col = 0; col < 3; col++)
+		{
+			if (col)
+				printf(" ");
+			printf("%d", grid[row][col]);
+		}
+		printf("\n");
+	}
 }
 
 /**
