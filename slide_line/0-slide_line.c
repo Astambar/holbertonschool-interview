@@ -1,12 +1,12 @@
 #include "slide_line.h"
 
 /**
- * slide_line - slides and merges an array of integers
- * @line: points to an array of integers containing size elements
- * @size: size of the array
- * @direction: direction to slide and merge
+ * slide_line - fait glisser et fusionne un tableau d'entiers
+ * @line: pointe vers un tableau d'entiers contenant des éléments de taille
+ * @size: taille du tableau
+ * @direction: direction pour faire glisser et fusionner
  *
- * Return: 1 upon success, or 0 upon failure
+ * Return: 1 en cas de succès, ou 0 en cas d'échec
  */
 int slide_line(int *line, size_t size, int direction)
 {
@@ -22,28 +22,28 @@ int slide_line(int *line, size_t size, int direction)
 }
 
 /**
- * slide_left - slides and merges an array of integers to the left
- * @line: points to an array of integers containing size elements
- * @size: size of the array
+ * slide_left - fait glisser et fusionne un tableau d'entiers vers la gauche
+ * @line: pointe vers un tableau d'entiers contenant des éléments de taille
+ * @size: taille du tableau
  */
 void slide_left(int *line, size_t size)
 {
-	size_t i, j;
+	size_t current_index, next_index;
 
-	for (i = 0; i < size; i++)
+	for (current_index = 0; current_index < size; current_index++)
 	{
-		if (line[i] == 0)
+		if (line[current_index] == 0)
 			continue;
 
-		for (j = i + 1; j < size; j++)
+		for (next_index = current_index + 1; next_index < size; next_index++)
 		{
-			if (line[j] == 0)
+			if (line[next_index] == 0)
 				continue;
 
-			if (line[i] == line[j])
+			if (line[current_index] == line[next_index])
 			{
-				line[i] *= 2;
-				line[j] = 0;
+				line[current_index] *= 2;
+				line[next_index] = 0;
 				break;
 			}
 			else
@@ -51,40 +51,40 @@ void slide_left(int *line, size_t size)
 		}
 	}
 
-	for (i = 0, j = 0; i < size; i++)
+	for (current_index = 0, next_index = 0; current_index < size; current_index++)
 	{
-		if (line[i] != 0)
+		if (line[current_index] != 0)
 		{
-			line[j++] = line[i];
-			if (j - 1 != i)
-				line[i] = 0;
+			line[next_index++] = line[current_index];
+			if (next_index - 1 != current_index)
+				line[current_index] = 0;
 		}
 	}
 }
 
 /**
- * slide_right - slides and merges an array of integers to the right
- * @line: points to an array of integers containing size elements
- * @size: size of the array
+ * slide_right - fait glisser et fusionne un tableau d'entiers vers la droite
+ * @line: pointe vers un tableau d'entiers contenant des éléments de taille
+ * @size: taille du tableau
  */
 void slide_right(int *line, size_t size)
 {
-	ssize_t i, j;
+	ssize_t current_index, next_index;
 
-	for (i = size - 1; i >= 0; i--)
+	for (current_index = size - 1; current_index >= 0; current_index--)
 	{
-		if (line[i] == 0)
+		if (line[current_index] == 0)
 			continue;
 
-		for (j = i - 1; j >= 0; j--)
+		for (next_index = current_index - 1; next_index >= 0; next_index--)
 		{
-			if (line[j] == 0)
+			if (line[next_index] == 0)
 				continue;
 
-			if (line[i] == line[j])
+			if (line[current_index] == line[next_index])
 			{
-				line[i] *= 2;
-				line[j] = 0;
+				line[current_index] *= 2;
+				line[next_index] = 0;
 				break;
 			}
 			else
@@ -92,13 +92,13 @@ void slide_right(int *line, size_t size)
 		}
 	}
 
-	for (i = size - 1, j = size - 1; i >= 0; i--)
+	for (current_index = size - 1, next_index = size - 1; current_index >= 0; current_index--)
 	{
-		if (line[i] != 0)
+		if (line[current_index] != 0)
 		{
-			line[j--] = line[i];
-			if (j + 1 != i)
-				line[i] = 0;
+			line[next_index--] = line[current_index];
+			if (next_index + 1 != current_index)
+				line[current_index] = 0;
 		}
 	}
 }
