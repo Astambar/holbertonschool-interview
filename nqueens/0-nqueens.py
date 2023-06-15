@@ -10,11 +10,13 @@ where N is an integer greater than or equal to 4.
 
 import sys
 
+
 def solve_nqueens(board_size):
     """Solve the N queens problem using recursion."""
     solutions = []
     solve(board_size, 0, [], solutions)
     return solutions
+
 
 def solve(board_size, row, queens, solutions):
     """Recursively solve the N queens problem."""
@@ -28,6 +30,7 @@ def solve(board_size, row, queens, solutions):
             solve(board_size, row + 1, queens, solutions)
             queens.pop()
 
+
 def is_safe(row, col, queens):
     """Check if the queen is safe from other queens."""
     for (r, c) in queens:
@@ -35,11 +38,13 @@ def is_safe(row, col, queens):
             return False
     return True
 
+
 def print_solutions(solutions):
     """Print the solutions in a readable format."""
     for solution in solutions:
         formatted_solution = [[row, col] for (row, col) in solution]
         print(formatted_solution)
+
 
 def main():
     if len(sys.argv) != 2:
@@ -58,6 +63,7 @@ def main():
 
     solutions = solve_nqueens(board_size)
     print_solutions(solutions)
+
 
 if __name__ == "__main__":
     main()
