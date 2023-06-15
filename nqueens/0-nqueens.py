@@ -1,48 +1,63 @@
 #!/usr/bin/python3
-# -*- coding: utf-8 -*-
-"""_summary_
+"""N queens problem
+This program solves the N queens problem by finding all possible configurations
+of an N-sized chessboard where the queens do not attack each other.
 
-Returns:
-    _type_: _description_
+Usage: nqueens N
+
+where N is an integer greater than or equal to 4.
 """
+
 import sys
 
-def is_safe(board, row, col):
-    # Vérifie si une reine peut être placée en (row, col) sur le plateau
-    for i in range(row):
-        if board[i] == col or board[i] - col == i - row or board[i] - col == row - i:
+def solve_nqueens(board_size):
+    """Solve the N queens problem using recursion."""
+    solutions = []
+    solve(board_size, 0, [], solutions)
+    return solutions
+
+def solve(board_size, row, queens, solutions):
+    """Recursively solve the N queens problem."""
+    if row == board_size:
+        solutions.append(queens.copy())
+        return
+
+    for col in range(board_size):
+        if is_safe(row, col, queens):
+            queens.append((row, col))
+            solve(board_size, row + 1, queens, solutions)
+            queens.pop()
+
+def is_safe(row, col, queens):
+    """Check if the queen is safe from other queens."""
+    for (r, c) in queens:
+        if row == r or col == c or abs(row - r) == abs(col - c):
             return False
     return True
 
-def solve_nqueens(board, row, n):
-    # Résout le problème des N reines en utilisant le backtracking
-    if row == n:
-        print(board)
-        return
+def print_solutions(solutions):
+    """Print the solutions in a readable format."""
+    for solution in solutions:
+        formatted_solution = [[row, col] for (row, col) in solution]
+        print(formatted_solution)
 
-    for col in range(n):
-        if is_safe(board, row, col):
-            board[row] = col
-            solve_nqueens(board, row + 1, n)
-
-if __name__ == "__main__":
-    # Vérification des arguments de ligne de commande
+def main():
     if len(sys.argv) != 2:
         print("Usage: nqueens N")
         sys.exit(1)
 
     try:
-        n = int(sys.argv[1])
+        board_size = int(sys.argv[1])
     except ValueError:
         print("N must be a number")
         sys.exit(1)
 
-    if n < 4:
+    if board_size < 4:
         print("N must be at least 4")
         sys.exit(1)
 
-    # Création d'un plateau de taille N × N initialisé avec des zéros
-    board = [0] * n
+    solutions = solve_nqueens(board_size)
+    print_solutions(solutions)
 
-    # Résolution du problème des N reines
-    solve_nqueens(board, 0, n)
+if __name__ == "__main__":
+    main()
