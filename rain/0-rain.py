@@ -1,8 +1,12 @@
 #!/usr/bin/python3
+"""_0-rain.py_
+"""
+
 
 def rain(walls):
     """
-    Calculate how many square units of water will be retained after it rains.
+    Calcule le nombre d'unités carrées d'eau
+      qui seront retenues après la pluie.
     """
     left = 0
     right = len(walls) - 1
