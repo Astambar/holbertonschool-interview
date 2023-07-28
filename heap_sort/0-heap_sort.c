@@ -17,18 +17,15 @@ void sift_down(int *array, size_t start, size_t end, size_t size)
 	{
 		right = left + 1;
 		swap = root;
-
 		if (right <= end && array[right] > array[swap])
 			swap = right;
 		if (array[left] > array[swap])
 			swap = left;
 		if (swap == root)
 			return;
-
-		int temp = array[root];
-		array[root] = array[swap];
-		array[swap] = temp;
-
+		array[root] ^= array[swap];
+		array[swap] ^= array[root];
+		array[root] ^= array[swap];
 		root = swap;
 		print_array(array, size);
 	}
@@ -42,11 +39,11 @@ void sift_down(int *array, size_t start, size_t end, size_t size)
  */
 void heap_sort(int *array, size_t size)
 {
-	if (array == NULL || size <= 1)
-		return;
-
 	size_t start = (size - 2) / 2;
 	size_t end = size - 1;
+
+	if (array == NULL || size <= 1)
+	return;
 
 	while (start > 0)
 	{
@@ -58,13 +55,11 @@ void heap_sort(int *array, size_t size)
 
 	while (end > 0)
 	{
-		int temp = array[end];
-		array[end] = array[0];
-		array[0] = temp;
-
+		array[end] ^= array[0];
+		array[0] ^= array[end];
+		array[end] ^= array[0];
 		print_array(array, size);
 		end--;
-
 		sift_down(array, 0, end, size);
 	}
 }
