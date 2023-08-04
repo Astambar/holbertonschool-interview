@@ -3,6 +3,8 @@
 
 #include <stddef.h>
 
+/* Function prototype for recursive array printing */
+void print_array(int *array, size_t left, size_t right);
 /* Function prototype */
 int advanced_binary(int *array, size_t size, int value);
 
