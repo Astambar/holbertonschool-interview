@@ -11,13 +11,13 @@
  */
 void recursive_print_array(int *array, size_t left, size_t right)
 {
-    if (left <= right)
-    {
-        printf("%d", array[left]);
-        if (left < right)
-            printf(", ");
-        recursive_print_array(array, left + 1, right);
-    }
+	if (left <= right)
+	{
+		printf("%d", array[left]);
+		if (left < right)
+			printf(", ");
+		recursive_print_array(array, left + 1, right);
+	}
 }
 
 /**
@@ -32,31 +32,31 @@ void recursive_print_array(int *array, size_t left, size_t right)
  */
 int advanced_binary_recursive(int *array, size_t left, size_t right, int value)
 {
-    size_t mid;
+	size_t mid;
 
-    if (array == NULL || left > right)
-        return (-1);
+	if (array == NULL || left > right)
+		return (-1);
 
-    printf("Searching in array: ");
-    recursive_print_array(array, left, right);
-    printf("\n");
+	printf("Searching in array: ");
+	recursive_print_array(array, left, right);
+	printf("\n");
 
-    mid = (left + right) / 2;
+	mid = (left + right) / 2;
 
-    if (array[mid] == value)
-    {
-        if (mid == 0 || array[mid - 1] != value)
-            return (mid);
-        return advanced_binary_recursive(array, left, mid, value);
-    }
-    else if (array[mid] < value)
-    {
-        return advanced_binary_recursive(array, mid + 1, right, value);
-    }
-    else
-    {
-        return advanced_binary_recursive(array, left, mid, value);
-    }
+	if (array[mid] == value)
+	{
+		if (mid == 0 || array[mid - 1] != value)
+			return (mid);
+		return advanced_binary_recursive(array, left, mid, value);
+	}
+	else if (array[mid] < value)
+	{
+		return advanced_binary_recursive(array, mid + 1, right, value);
+	}
+	else
+	{
+		return advanced_binary_recursive(array, left, mid, value);
+	}
 }
 
 /**
@@ -70,5 +70,5 @@ int advanced_binary_recursive(int *array, size_t left, size_t right, int value)
  */
 int advanced_binary(int *array, size_t size, int value)
 {
-    return advanced_binary_recursive(array, 0, size - 1, value);
+	return advanced_binary_recursive(array, 0, size - 1, value);
 }
