@@ -21,11 +21,14 @@ void recursive_print_array(int *array, size_t left, size_t right)
 }
 
 /**
- * advanced_binary_recursive - Fonction auxiliaire récursive pour advanced_binary.
+ * advanced_binary_recursive - Fonction auxiliaire récursive
+ * pour advanced_binary.
  *
  * @array: Un pointeur vers le premier élément du tableau.
- * @left: L'index de gauche du sous-tableau actuel dans lequel effectuer la recherche.
- * @right: L'index de droite du sous-tableau actuel dans lequel effectuer la recherche.
+ * @left: L'index de gauche du sous-tableau actuel
+ * dans lequel effectuer la recherche.
+ * @right: L'index de droite du sous-tableau actuel
+ * dans lequel effectuer la recherche.
  * @value: La valeur à rechercher.
  *
  * Return: L'index où se trouve la valeur, ou -1 s'il n'est pas trouvé.
