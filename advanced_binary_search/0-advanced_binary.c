@@ -32,6 +32,8 @@ void recursive_print_array(int *array, size_t left, size_t right)
  */
 int advanced_binary_recursive(int *array, size_t left, size_t right, int value)
 {
+    size_t mid;
+
     if (array == NULL || left > right)
         return (-1);
 
@@ -39,7 +41,7 @@ int advanced_binary_recursive(int *array, size_t left, size_t right, int value)
     recursive_print_array(array, left, right);
     printf("\n");
 
-    size_t mid = (left + right) / 2;
+    mid = (left + right) / 2;
 
     if (array[mid] == value)
     {
