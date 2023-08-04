@@ -49,7 +49,7 @@ int advanced_binary_recursive(int *array, size_t left, size_t right, int value)
 	if (array[mid] == value)
 	{
 		if (mid == 0 || array[mid - 1] != value)
-			return mid;
+			return (mid);
 		return (advanced_binary_recursive(array, left, mid, value));
 	}
 	else if (array[mid] < value)
@@ -65,7 +65,8 @@ int advanced_binary_recursive(int *array, size_t left, size_t right, int value)
 /**
  * advanced_binary - Recherche une valeur dans un tableau trié d'entiers.
  *
- * @array: Un pointeur vers le premier élément du tableau dans lequel effectuer la recherche.
+ * @array: Un pointeur vers le premier élément du tableau
+ * dans lequel effectuer la recherche.
  * @size: Le nombre d'éléments dans le tableau.
  * @value: La valeur à rechercher.
  *
