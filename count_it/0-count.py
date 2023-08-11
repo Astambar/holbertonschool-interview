@@ -1,78 +1,50 @@
 #!/usr/bin/python3
+""" Count it!
 """
-0-count.py
-"""
-
-import requests
+from requests import request
 
 
-def count_words(subreddit, word_list, counts=None):
+def generate_dicts(word_list):
+    """ generate dicts
     """
-    Compte les occurrences de mots-clés dans les titres
-    des articles populaires d'un subreddit.
+    count = {k: 0 for k in word_list}
+    dup = {}
+    for k in word_list:
+        if k not in dup:
+            dup[k] = 0
+        dup[k] += 1
+    return (count, dup)
 
-    Args:
-        subreddit (str): Le subreddit à interroger.
-        word_list (list): Une liste de mots-clés dont
-        on veut compter les occurrences.
-        counts (dict, optionnel): Un dictionnaire pour stocker
-        les comptages de mots-clés de manière récursive.
 
-    Returns:
-        None
+def count_words(subreddit, word_list, after="", count={}, dup={}, init=0):
+    """ recursive function that queries the Reddit API
     """
-    # Si le dictionnaire de comptages n'est pas fourni, on le crée
-    if counts is None:
-        counts = {}
+    if not init:
+        count, dup = generate_dicts(word_list)
 
-    # Effectuer une requête à l'API Reddit pour obtenir
-    # les articles populaires du subreddit
-    response = requests.get(f"https://www.reddit.com/r/{subreddit}/hot.json",
-                            headers={"User-Agent": "count_it/0.1"})
-    data = response.json()
+    url = "https://api.reddit.com/r/{}/hot?after={}".format(subreddit, after)
+    headers = {"User-Agent": "Python3"}
+    response = request("GET", url, headers=headers).json()
+    try:
+        data = response.get('data')
+        top = data.get('children')
+        _after = data.get('after')
 
-    # Parcourir les articles et leurs titres
-    for post in data['data']['children']:
-        title = post['data']['title'].lower()
-        # Parcourir les mots-clés à compter
-        for word in word_list:
-            # Vérifier si le mot-clé est présent dans le titre de l'article
-            if word.lower() in title:
-                # Incrémenter le compteur du mot-clé
-                if word in counts:
-                    counts[word] += 1
-                else:
-                    counts[word] = 1
+        for item in top:
+            data = item.get('data')['title']
+            for word in count:
+                amount = data.lower().split(' ').count(word.lower())
+                count[word] += amount
 
-    # Si la réponse contient un élément "after",
-    # cela signifie qu'il y a plus d'articles à récupérer
-    # Donc, on rappelle la fonction de manière récursive
-    # avec le même subreddit et les mêmes mots-clés
-    if 'after' in data['data'] and data['data']['after']:
-        count_words(subreddit, word_list, counts)
+        if _after:
+            count_words(subreddit, word_list, _after, count, dup, 1)
+        else:
+            sort_abc = sorted(count.items(), key=lambda tup: tup[::-1])
+            desc = sorted(sort_abc, key=lambda tup: tup[1], reverse=True)
 
-    # Si aucun comptage n'a été effectué, on quitte la fonction
-    if not counts:
-        return
-
-    # Trier les comptages par ordre décroissant en fonction du nombre
-    # d'occurrences
-    # En cas d'égalité, trier alphabétiquement par ordre croissant
-    sorted_counts = sorted(counts.items(), key=lambda x: (-x[1], x[0].lower()))
-    # Afficher les résultats
-    for keyword, count in sorted_counts:
-        print(f"{keyword}: {count}")
-
-
-if __name__ == '__main__':
-    import sys
-
-    if len(sys.argv) < 3:
-        print("Usage: {} <subreddit> <list of keywords>".format(sys.argv[0]))
-        print(
-            "Ex: {} programming 'python java javascript'".format(sys.argv[0])
-            )
-    else:
-        subreddit = sys.argv[1]
-        keywords = sys.argv[2].split()
-        count_words(subreddit, keywords)
+            for name, cnt in desc:
+                cnt *= dup[name]
+                if cnt:
+                    print('{}: {}'.format(name.lower(), cnt))
+    except Exception:
+        return None
