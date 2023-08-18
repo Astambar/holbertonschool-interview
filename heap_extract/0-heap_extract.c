@@ -7,45 +7,89 @@
  */
 int heap_extract(heap_t **root)
 {
-    if (root == NULL || *root == NULL)
-        return 0;
+	if (root == NULL || *root == NULL)
+		return (0);
 
-    int value = (*root)->n;
-    binary_tree_t *last_node = *root;
-    binary_tree_t *temp = *root;
+	int value = (*root)->n;
+	binary_tree_t *last_node = get_last_node(*root);
 
-    /* Find the last node of the heap */
-    while (last_node->right)
-        last_node = last_node->right;
+	if (last_node != *root)
+		replace_root_with_last(root, last_node);
+	else
+	{
+		free(*root);
+		*root = NULL;
+		return (value);
+	}
 
-    /* Swap root value with last node value */
-    (*root)->n = last_node->n;
+	heapify_after_extract(*root);
 
-    /* Remove last node */
-    if (last_node->parent->right == last_node)
-        last_node->parent->right = NULL;
-    else
-        last_node->parent->left = NULL;
+	return (value);
+}
 
-    free(last_node);
+/**
+ * get_last_node - Finds the last node of a binary tree
+ * @root: Root node of the tree
+ * Return: Pointer to the last node
+ */
+binary_tree_t *get_last_node(binary_tree_t *root)
+{
+	binary_tree_t *last_node = root;
 
-    /* Rebuild the heap */
-    while (temp->left)
-    {
-        binary_tree_t *largest = temp->left;
+	while (last_node->right)
+		last_node = last_node->right;
 
-        if (temp->right && temp->right->n > temp->left->n)
-            largest = temp->right;
+	return (last_node);
+}
 
-        if (temp->n >= largest->n)
-            break;
+/**
+ * replace_root_with_last - Replaces the root node with the last node
+ * @root: Double pointer to the root node
+ * @last: Pointer to the last node
+ */
+void replace_root_with_last(binary_tree_t **root, binary_tree_t *last)
+{
+	if (last->parent->right == last)
+		last->parent->right = NULL;
+	else
+		last->parent->left = NULL;
 
-        int temp_value = temp->n;
-        temp->n = largest->n;
-        largest->n = temp_value;
+	(*root)->n = last->n;
+	free(last);
+}
 
-        temp = largest;
-    }
+/**
+ * heapify_after_extract - Rebuilds the Max Binary Heap after extraction
+ * @root: Pointer to the root node
+ */
+void heapify_after_extract(binary_tree_t *root)
+{
+	binary_tree_t *temp = root;
 
-    return value;
+	while (temp->left)
+	{
+		binary_tree_t *largest = temp->left;
+
+		if (temp->right && temp->right->n > temp->left->n)
+			largest = temp->right;
+
+		if (temp->n >= largest->n)
+			break;
+
+		swap_values(&(temp->n), &(largest->n));
+
+		temp = largest;
+	}
+}
+
+/**
+ * swap_values - Swaps two integer values
+ * @a: Pointer to the first value
+ * @b: Pointer to the second value
+ */
+void swap_values(int *a, int *b)
+{
+	int temp = *a;
+	*a = *b;
+	*b = temp;
 }
