@@ -71,7 +71,6 @@ char *multiply_strings(char *number1, char *number2)
 
 	for (i = length_number2 - 1; i >= 0; i--)
 	{
-		
 
 		for (j = length_number1 - 1; j >= 0; j--)
 		{
