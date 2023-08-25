@@ -32,13 +32,14 @@ int _isnumber(char *string)
 char *allocate_and_initialize_memory(unsigned int num_members)
 {
 	char *pointer = malloc(num_members + 1);
+	unsigned int i;
 
 	if (pointer == NULL)
 	{
 		printf("Erreur d'allocation mémoire\n");
 		exit(1);
 	}
-	for (unsigned int i = 0; i < num_members; i++)
+	for (i = 0; i < num_members; i++)
 	{
 		pointer[i] = '0';
 	}
