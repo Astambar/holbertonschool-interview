@@ -61,6 +61,8 @@ char *multiply_strings(char *number1, char *number2)
 {
 	char *result;
 	int length_number1, length_number2, total_length, i, j;
+	int carry_product = 0, carry_sum = 0;
+	int result_index, product, sum;
 
 	length_number1 = strlen(number1);
 	length_number2 = strlen(number2);
@@ -69,15 +71,15 @@ char *multiply_strings(char *number1, char *number2)
 
 	for (i = length_number2 - 1; i >= 0; i--)
 	{
-		int carry_product = 0, carry_sum = 0;
+		
 
 		for (j = length_number1 - 1; j >= 0; j--)
 		{
-			int result_index = i + j + 1;
-			int product = (number1[j] - '0') * (number2[i] - '0') + carry_product;
+			result_index = i + j + 1;
+			product = (number1[j] - '0') * (number2[i] - '0') + carry_product;
 
 			carry_product = product / 10;
-			int sum = (result[result_index] - '0') + (product % 10) + carry_sum;
+			sum = (result[result_index] - '0') + (product % 10) + carry_sum;
 
 			carry_sum = sum / 10;
 			result[result_index] = (sum % 10) + '0';
