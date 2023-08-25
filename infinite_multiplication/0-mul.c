@@ -4,89 +4,44 @@
 #include <ctype.h>
 
 /**
- * _isnumber - Vérifie si une chaîne représente un nombre.
- * @string: La chaîne d'entrée à vérifier.
- * Return: 1 si la chaîne est un nombre, 0 sinon.
+ * _isnumber - checks if string is number
+ * @s: string
+ * Return: 1 if number, 0 if not
  */
-int _isnumber(char *string)
+int _isnumber(char *s)
 {
-	int i;
+	int i, check, d;
 
-	for (i = 0; string[i] != '\0'; i++)
+	d = 0, check = 1;
+	for (i = 0; *(s + i) != 0; i++)
 	{
-		if (!isdigit(string[i]))
+		d = isdigit(*(s + i));
+		if (d == 0)
 		{
-			return (0);
+			check = 0;
+			break;
 		}
 	}
-	return (1);
+	return (check);
 }
 
 /**
- * allocate_and_initialize_memory - Alloue de la mémoire
- * et l'initialise avec '0'.
- * @num_members: Le nombre de membres mémoire à allouer.
- * Return: Un pointeur vers la mémoire allouée.
+ * _callocX - reserves memory initialized to 0
+ * @nmemb: # of bytes
+ * Return: pointer
  */
-
-char *allocate_and_initialize_memory(unsigned int num_members)
+char *_callocX(unsigned int nmemb)
 {
-	char *pointer = malloc(num_members + 1);
 	unsigned int i;
+	char *p;
 
-	if (pointer == NULL)
-	{
-		printf("Erreur d'allocation mémoire\n");
-		exit(1);
-	}
-	for (i = 0; i < num_members; i++)
-	{
-		pointer[i] = '0';
-	}
-	pointer[num_members] = '\0';
-	return (pointer);
-}
-
-/**
- * multiply_strings - Multiplie deux chaînes de caractères en entrée.
- * @number1: La première chaîne de caractères
- * en entrée (le multiplicateur).
- *
- * @number2: La deuxième chaîne de caractères
- * en entrée (le multiplicande).
- *
- * Return: Un pointeur vers la chaîne de caractères résultante.
- */
-char *multiply_strings(char *number1, char *number2)
-{
-	char *result;
-	int length_number1, length_number2, total_length, i, j;
-	int carry_product = 0, carry_sum = 0;
-	int result_index, product, sum;
-
-	length_number1 = strlen(number1);
-	length_number2 = strlen(number2);
-	total_length = length_number1 + length_number2;
-	result = allocate_and_initialize_memory(total_length);
-
-	for (i = length_number2 - 1; i >= 0; i--)
-	{
-
-		for (j = length_number1 - 1; j >= 0; j--)
-		{
-			result_index = i + j + 1;
-			product = (number1[j] - '0') * (number2[i] - '0') + carry_product;
-
-			carry_product = product / 10;
-			sum = (result[result_index] - '0') + (product % 10) + carry_sum;
-
-			carry_sum = sum / 10;
-			result[result_index] = (sum % 10) + '0';
-		}
-		result[i] = (carry_product + carry_sum) + '0';
-	}
-
-	return (result);
+	p = malloc(nmemb + 1);
+	if (p == 0)
+		return (0);
+	for (i = 0; i < nmemb; i++)
+		p[i] = '0';
+	p[i] = '\0';
+	return (p);
 }
 
 /**
@@ -125,27 +80,53 @@ void print_result(char *result)
  */
 int main(int argc, char **argv)
 {
-	char *num1, *num2, *result;
+    int i, j, length_num1, length_num2, total_length,
+	multiplication, addition, carry_multiply, carry_addition,
+	result_index, leading_zeros = 0;
+    char *result;
 
-	if (argc != 3 || !_isnumber(argv[1]) || !_isnumber(argv[2]))
-	{
-		printf("Erreur : Entrée invalide\n");
-		return (1);
-	}
+    if (argc != 3 || !_isnumber(argv[1]) || !_isnumber(argv[2]))
+    {
+        printf("Error\n");
+        exit(98);
+    }
 
-	num1 = argv[1];
-	num2 = argv[2];
+    if (atoi(argv[1]) == 0 || atoi(argv[2]) == 0)
+    {
+        printf("0\n");
+        exit(0);
+    }
 
-	if (atoi(num1) == 0 || atoi(num2) == 0)
-	{
-		printf("0\n");
-		return (0);
-	}
+    length_num1 = strlen(argv[1]);
+    length_num2 = strlen(argv[2]);
+    total_length = length_num1 + length_num2;
+    result = _callocX(total_length);
 
-	result = multiply_strings(num1, num2);
-	print_result(result);
+    for (i = length_num2 - 1; i >= 0; i--)
+    {
+        carry_multiply = 0, carry_addition = 0;
+        for (j = length_num1 - 1; j >= 0; j--)
+        {
+            result_index = i + j + 1;
+            multiplication = (argv[1][j] - '0') * (argv[2][i] - '0') + carry_multiply;
+            carry_multiply = multiplication / 10;
+            addition = (result[result_index] - '0') + (multiplication % 10) + carry_addition;
+            carry_addition = addition / 10;
+            result[result_index] = (addition % 10) + '0';
+        }
+        result[result_index - 1] = (carry_multiply + carry_addition) + '0';
+    }
 
-	free(result);
+    if (result[0] == '0')
+        leading_zeros = 1;
 
-	return (0);
+    for (; leading_zeros < total_length; leading_zeros++)
+    {
+        printf("%c", result[leading_zeros]);
+    }
+    printf("\n");
+
+    free(result);
+    return 0;
 }
+
