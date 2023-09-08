@@ -1,7 +1,8 @@
 #include "lists.h"
 /**
  * find_listint_loop - trouve la boucle dans une liste chaînée.
- * @head: celà représente la tête de la liste et permet de trouvé une boucle
+ * @head: celà représente la tête de la liste
+ * et permet de trouvé une boucle
  * Return: nœud où se trouve la boucle sinon NULL
  */
 listint_t *find_listint_loop(listint_t *head)
