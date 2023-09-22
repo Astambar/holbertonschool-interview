@@ -5,19 +5,13 @@ Main file for testing
 
 
 def makeChange(coins, total):
-    if total <= 0:
-        return 0
+    if total < 0:
+        return -1
 
-    for coin in coins:
-        if coin <= 0:
-            return -1
-
-    # Initialiser un tableau pour stocker le nombre minimum
-    # de pièces pour chaque montant
+    # Initialiser un tableau pour stocker le nombre minimum de pièces pour chaque montant
     dp = [float('inf')] * (total + 1)
     dp[0] = 0
 
-    # Calcul du nombre minimum de pièces
     for coin in coins:
         for amount in range(coin, total + 1):
             dp[amount] = min(dp[amount], dp[amount - coin] + 1)
