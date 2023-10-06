@@ -2,18 +2,20 @@
 #define LIST_H
 
 /**
- * struct List - Structure pour un nœud de liste doublement chaînée circulaire
+ * struct List - Structure pour un nœud de liste
+ * doublement chaînée circulaire
  * @str: Chaîne de caractères (allouée dynamiquement)
  * @prev: Pointe vers le nœud précédent
  * @next: Pointe vers le nœud suivant
  *
  * Description : Structure d'un nœud de liste doublement chaînée circulaire
  */
+
 typedef struct List
 {
-    char *str;
-    struct List *prev;
-    struct List *next;
+	char *str;
+	struct List *prev;
+	struct List *next;
 } List;
 
 /* Prototypes de fonctions */
